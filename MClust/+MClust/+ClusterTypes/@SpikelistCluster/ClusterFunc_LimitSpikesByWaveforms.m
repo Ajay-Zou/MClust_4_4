@@ -26,12 +26,16 @@ myUndo = MClustUtils.UndoSystem();
 %     error('MClust:Cutter', 'LimitSpikesByWaveforms assumes 4 channels.');
 % end
 
+%edit ETG 20180419
+%adjusts subplot bounds
+subPxy = ceil(sqrt(nCh));
+
 F = figure('Name', ['Waveforms: ' self.name], ...
     'Tag', MCS.DeletableFigureTag, ...
     'Units','Normalized');
 ax = nan(nCh,1); 
 for iCh = 1:nCh
-    ax(iCh) = subplot(2,2,iCh);
+    ax(iCh) = subplot(subPxy,subPxy,iCh);
     set(ax(iCh), 'UserData', iCh);
 end
 
