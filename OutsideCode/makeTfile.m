@@ -4,6 +4,10 @@
 
 cd(FilePath);
 
+if ischar(FileList)
+    FileList=cellstr(FileList);
+end
+    
 for i=1:length(FileList)
     FileName=FileList{i}
     FullName=fullfile(FilePath,FileName);
