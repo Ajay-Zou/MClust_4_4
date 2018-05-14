@@ -17,4 +17,7 @@ for iC = 2:nC
 end
 
 disp(Overlap);
-msgbox(num2str(Overlap, '%4d '), 'Overlap');
+h = msgbox(num2str(Overlap, '%4d '), 'Overlap');
+ah = get( h, 'CurrentAxes' );
+ch = get( ah, 'Children' );
+set(ch, 'FontName', 'Courier New');
