@@ -2,7 +2,7 @@ function  ClusterFunc_LimitSpikesByWaveforms(self)
 
 % ClusterFunc_LimitSpikesByWaveforms (SpikelistCluster)
 %
-% Plots four subplots with waveforms, allows limits
+% Plots subplots with waveforms, allows limits
 
 %==========================================================
 % PARAMETERS
@@ -26,16 +26,14 @@ myUndo = MClustUtils.UndoSystem();
 %     error('MClust:Cutter', 'LimitSpikesByWaveforms assumes 4 channels.');
 % end
 
-%edit ETG 20180419
-%adjusts subplot bounds
-subPxy = ceil(sqrt(nCh));
+[subx, suby] = MClustUtils.BestSubplots(nCh);
 
 F = figure('Name', ['Waveforms: ' self.name], ...
     'Tag', MCS.DeletableFigureTag, ...
     'Units','Normalized');
 ax = nan(nCh,1); 
 for iCh = 1:nCh
-    ax(iCh) = subplot(subPxy,subPxy,iCh);
+    ax(iCh) = subplot(subx,suby,iCh);
     set(ax(iCh), 'UserData', iCh);
 end
 
