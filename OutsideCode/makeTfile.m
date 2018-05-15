@@ -9,7 +9,7 @@ if ischar(FileList)
 end
     
 for i=1:length(FileList)
-    FileName=FileList{i}
+    FileName=FileList{i};
     FullName=fullfile(FilePath,FileName);
     [~,FileNameNoExt]=fileparts(FullName);
 %% Generates the new TS variable
@@ -22,10 +22,13 @@ for i=1:length(FileList)
     % find the tt #
     indexOf_nt=strfind(FileNameNoExt,'nt');
     thisTT=FileNameNoExt(indexOf_nt+2:end);
-    NewNameTT=['TT' thisTT '.mat']
+    NewNameTT=['TT' thisTT '.mat'];
 %% Save
     FullNameTT=fullfile(FilePath,NewNameTT);
     save(FullNameTT,'TS');
+%% Clean up workspace
+clear i indexOf_nt NewNameTT thisTT FileList FileName FileNameNoExt ...
+    File Path FullName FullNameTT
 end
 
 function [timestamp, numSpikes, hdr ] = readmclusttfile( sFilePath )
