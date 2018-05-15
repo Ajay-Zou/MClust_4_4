@@ -26,8 +26,8 @@ classdef (Sealed) MClustSettings < handle
         
         % -- display
         %AverageWaveform_ylim = 16*[-2100 2100];  % For Cheetah 5        
-        AverageWaveform_ylim = [-2100 2100]; % For earlier versions of Cheetah
-        %AverageWaveform_ylim = [1000 1000]; % For Intan
+        %AverageWaveform_ylim = [-2100 2100]; % For earlier versions of Cheetah
+        AverageWaveform_ylim = [1000 1000]; % For Intan
         
         colors = [];
         ClusterCutWindow_Marker = 1;
@@ -39,10 +39,10 @@ classdef (Sealed) MClustSettings < handle
         CHDrawingAxisWindow_Pos= [500 200 650 650];
         
         % process
-        NeuralLoadingFunction = 'LoadTT_NeuralynxNT'; % Loading Engine
+        NeuralLoadingFunction = 'mClustTrodesLoadingEngine'; % Loading Engine
         
         FeaturesAvailable = {};
-        FeaturesToUse = {'feature_Peak', 'feature_Time'};
+        FeaturesToUse = {'feature_Peak', 'feature_Time', 'feature_Energy'};
         
         normalizeYN = false; 
         nCh = nan;  % will be filled with length of ChannelValidity in constructor
