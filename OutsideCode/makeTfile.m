@@ -12,13 +12,20 @@ for i=1:length(FileList)
     FileName=FileList{i}
     FullName=fullfile(FilePath,FileName);
     [~,FileNameNoExt]=fileparts(FullName);
+%% Generates the new TS variable
     TS=readmclusttfile(FullName);
-    
+%% Rename the matlab file
+    % remove the zero for units <10
     if FileNameNoExt(end-1)=='0'
         FileNameNoExt=[FileNameNoExt(1:end-2) FileNameNoExt(end)];
     end
-    FullNameT=fullfile(FilePath,[FileNameNoExt '.mat']);
-    save(FullNameT,'TS');
+    % find the tt #
+    indexOf_nt=strfind(FileNameNoExt,'nt');
+    thisTT=FileNameNoExt(indexOf_nt+2:end);
+    NewNameTT=['TT' thisTT '.mat']
+%% Save
+    FullNameTT=fullfile(FilePath,NewNameTT);
+    save(FullNameTT,'TS');
 end
 
 function [timestamp, numSpikes, hdr ] = readmclusttfile( sFilePath )
