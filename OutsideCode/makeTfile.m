@@ -26,11 +26,13 @@ for i=1:length(FileList)
 %% Save
     FullNameTT=fullfile(FilePath,NewNameTT);
     save(FullNameTT,'TS');
+
+end
 %% Clean up workspace
 clear i indexOf_nt NewNameTT thisTT FileList FileName FileNameNoExt ...
     File Path FullName FullNameTT
-end
 
+%%
 function [timestamp, numSpikes, hdr ] = readmclusttfile( sFilePath )
 %READMCLUSTTFILE   Reads a cluster t-file produced by MClust.
 %   Inputs:
