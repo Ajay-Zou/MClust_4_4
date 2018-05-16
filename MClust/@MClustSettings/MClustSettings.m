@@ -27,7 +27,8 @@ classdef (Sealed) MClustSettings < handle
         % -- display
         %AverageWaveform_ylim = 16*[-2100 2100];  % For Cheetah 5        
         %AverageWaveform_ylim = [-2100 2100]; % For earlier versions of Cheetah
-        AverageWaveform_ylim = [1000 1000]; % For Intan
+        %AverageWaveform_ylim = [-1000 1000]; % For Intan
+        AverageWaveform_ylim = [-70 70]; % For SpikeGadget
         
         colors = [];
         ClusterCutWindow_Marker = 1;
