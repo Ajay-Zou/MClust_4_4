@@ -17,7 +17,7 @@ for iC = 2:nC
 end
 
 disp(Overlap);
-h = msgbox(num2str(Overlap, '%4d '), 'Overlap');
-ah = get( h, 'CurrentAxes' );
-ch = get( ah, 'Children' );
-set(ch, 'FontName', 'Courier New');
+
+trimOverlap = Overlap(2:end, 2:end);
+hm = figure('Name', 'Overlap');
+heatmap(hm, trimOverlap);
