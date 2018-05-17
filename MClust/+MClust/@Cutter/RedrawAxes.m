@@ -51,10 +51,15 @@ else % DRAW IT
         if contains(xFeat.name, "Energy") || contains(xFeat.name, "Peak")
             xLim = [min(xFD)-eps, MCS.maxZoom+eps]; 
             
-            xMiss = int2str(sum(xFD>MCS.maxZoom));
-            xTot = int2str(numel(xFD));
-            disp(strcat(xMiss, " of ", xTot, " ", xFeat.name, ...
-                " points cut off due to maxZoom setting."));
+             xMiss = int2str(sum(xFD>MCS.maxZoom));
+             xTot = int2str(numel(xFD));
+             if xMiss/xTot >= 0.1
+                 xMissPercent = num2str(round(100*xMiss/xTot, 2))
+                 warning(strcat(xMissPercent, "% of ", xFeat.name, ...
+                     " points cut off due to maxZoom setting."));
+             end
+%             disp(strcat(xMiss, " of ", xTot, " ", xFeat.name, ...
+%                 " points cut off due to maxZoom setting."));
         else xLim = [min(xFD)-eps max(xFD)+eps];
         end
     else xLim = [min(xFD)-eps max(xFD)+eps];
@@ -69,10 +74,15 @@ else % DRAW IT
         if contains(yFeat.name, "Energy") || contains(yFeat.name, "Peak")
             yLim = [min(yFD)-eps, MCS.maxZoom+eps];
             
-            yMiss = int2str(sum(yFD>MCS.maxZoom));
-            yTot = int2str(numel(yFD));
-            disp(strcat(yMiss, " of ", yTot, " ", yFeat.name, ...
-                " points cut off due to maxZoom setting."));
+             yMiss = int2str(sum(yFD>MCS.maxZoom));
+             yTot = int2str(numel(yFD));
+             if yMiss/yTot >= 0.1
+                 yMissPercent = num2str(round(100*yMiss/yTot, 2))
+                 warning(strcat(yMissPercent, "% of ", yFeat.name, ...
+                     " points cut off due to maxZoom setting."));
+             end
+%             disp(strcat(yMiss, " of ", yTot, " ", yFeat.name, ...
+%                 " points cut off due to maxZoom setting."));
         else yLim = [min(yFD)-eps max(yFD)+eps];
         end        
         
