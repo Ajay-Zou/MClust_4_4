@@ -41,15 +41,42 @@ else % DRAW IT
     yFD = yFeat.GetData();
     
     
-    % ADR 2013-12-12 check if axes have changed
     ax = gca;
-    if streq(get(get(ax, 'xlabel'), 'string'), xFeat.name) && ...
-            streq(get(get(ax, 'ylabel'), 'string'), yFeat.name)
+    % set xLim
+    if streq(get(get(ax, 'xlabel'), 'string'), xFeat.name) % ADR 2013-12-12 check if axes have changed
         xLim = get(ax, 'XLim');
+    
+    elseif MCS.maxZoom > 0 %ETG 2018-05-17 restrict energy and peak window axis scalings to maxZoom
+        %adjust x axis range
+        if contains(xFeat.name, "Energy") || contains(xFeat.name, "Peak")
+            xLim = [min(xFD)-eps, MCS.maxZoom+eps]; 
+            
+            xMiss = int2str(sum(xFD>MCS.maxZoom));
+            xTot = int2str(numel(xFD));
+            disp(strcat(xMiss, " of ", xTot, " ", xFeat.name, ...
+                " points cut off due to maxZoom setting."));
+        else xLim = [min(xFD)-eps max(xFD)+eps];
+        end
+    else xLim = [min(xFD)-eps max(xFD)+eps];
+    end
+    
+    %set yLim
+    if streq(get(get(ax, 'ylabel'), 'string'), yFeat.name) % ADR 2013-12-12 check if axes have changed
         yLim = get(ax, 'YLim');
-    else
-        xLim = [min(xFD)-eps max(xFD)+eps]; 
-        yLim = [min(yFD)-eps max(yFD)+eps];
+        
+    elseif MCS.maxZoom > 0
+        %adjust y axis range
+        if contains(yFeat.name, "Energy") || contains(yFeat.name, "Peak")
+            yLim = [min(yFD)-eps, MCS.maxZoom+eps];
+            
+            yMiss = int2str(sum(yFD>MCS.maxZoom));
+            yTot = int2str(numel(yFD));
+            disp(strcat(yMiss, " of ", yTot, " ", yFeat.name, ...
+                " points cut off due to maxZoom setting."));
+        else yLim = [min(yFD)-eps max(yFD)+eps];
+        end        
+        
+    else yLim = [min(yFD)-eps max(yFD)+eps];
     end
     
     clf;
