@@ -39,7 +39,7 @@ classdef (Sealed) MClustSettings < handle
         ClusterCutWindow_Pos= [10 60 450 650];
         CHDrawingAxisWindow_Pos= [500 200 650 650];
         
-        maxZoom = 250; %restrict cutter window axes to less than this value
+        maxZoom = 500; %restrict cutter window axes to less than this value
                        %for Peak and Energy axes only
         
         % process
